@@ -102,15 +102,13 @@ class Test extends Component
 
     public function fibonacciEncrypt()
     {
-
         $this->fibonacciNewString = [];
         $splitted = str_split($this->fibonacciInputString);
 
         foreach ($splitted as $index => $char) {
-            $shiftNumber = $this->fibonacciService::getNumberFromSecuence($index) % 83;
+            $shiftNumber = $this->fibonacciService::getNumberFromSecuence($index) % 84;
             $code = $this->asciiMap::getCode($char);
-            // dump($shiftNumber);
-            $positionsToMove = ($code + $shiftNumber) % 83;
+            $positionsToMove = ($code + $shiftNumber) % 84;
             $char = $this->map[$positionsToMove];
             $this->fibonacciNewString[] = $char;
 
@@ -122,11 +120,7 @@ class Test extends Component
     {
         $this->fibonacciDecipheredNewString = [];
         $splitted = str_split($this->fibonacciEncryptedString);
-        // dd($splitted);
-        foreach ($splitted as $char) {
-            $code = $this->asciiMap::getCode($char);
-            $this->fibonacciService::decrypt($code);
-        }
-        $this->fibonacciDecipheredString = implode('', $this->fibonacciDecipheredNewString);
+        $this->fibonacciDecipheredString = $this->fibonacciService::decrypt($this->fibonacciEncryptedString);
+       
     }
 }

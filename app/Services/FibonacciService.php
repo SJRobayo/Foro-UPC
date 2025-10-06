@@ -6,6 +6,7 @@ use App\Constants\Ascii;
 
 class FibonacciService
 {
+    public static $asciiMap = Ascii::class;
     public $map = Ascii::MAP;
     public static function getNumberFromSecuence(int $position): int
     {
@@ -20,23 +21,27 @@ class FibonacciService
             $prev = $curr;
             $curr = $next;
         }
-        // dump($curr);
-        $positions = bcmod($curr, "83");
+        $positions = bcmod($curr, "84");
         return (int)$positions;
     }
 
-    public static function decrypt(int $position): int
+    public static function decrypt(String $message)
     {
-        $map = Ascii::MAP;
-        if ($position <= 0) return 0;
-        if ($position === 1) return 1;
 
-        $prev = 0;
-        $curr = 1;
-
-        foreach($map as $char){
-            dump($char);
+        $splitted = str_split($message);
+        $counter = 0;
+        $decryptedArray = [];
+        foreach ($splitted as $char) {
+            $code = static::$asciiMap::getCode($char);
+            $positionsMoved = self::getNumberFromSecuence($counter) % 84;
+            $positionsToMove = ($code - $positionsMoved);
+            if ($positionsToMove < 0) {
+                $positionsToMove = 84 + $positionsToMove;
+            }
+            $char = Ascii::MAP[$positionsToMove];
+            $decryptedArray[] = $char;
+            $counter++;
         }
-        return (int)$curr;
+        return implode('', $decryptedArray);
     }
 }
