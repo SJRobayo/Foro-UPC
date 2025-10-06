@@ -102,6 +102,7 @@ class Test extends Component
 
     public function fibonacciEncrypt()
     {
+        $this->validateFibonacciInput();
         $this->fibonacciNewString = [];
         $splitted = str_split($this->fibonacciInputString);
 
@@ -111,16 +112,44 @@ class Test extends Component
             $positionsToMove = ($code + $shiftNumber) % 84;
             $char = $this->map[$positionsToMove];
             $this->fibonacciNewString[] = $char;
-
         }
         $this->fibonacciOutputString = implode('', $this->fibonacciNewString);
     }
 
     public function fibonacciDecrypt()
     {
+        $this->validateEncryptedFibonacciInput();
         $this->fibonacciDecipheredNewString = [];
         $splitted = str_split($this->fibonacciEncryptedString);
         $this->fibonacciDecipheredString = $this->fibonacciService::decrypt($this->fibonacciEncryptedString);
-       
+    }
+
+    public function validateFibonacciInput()
+    {
+        $this->validate(
+            [
+                'fibonacciInputString' => 'required|string|max:100',
+            ],
+            [
+                'fibonacciInputString.required' => 'El camp no pot estar buit.',
+                'fibonacciInputString.string' => 'El camp ha de ser una cadena de text.',
+                'fibonacciInputString.max' => 'El camp no pot tenir més de :max caràcters.',
+
+            ]
+        );
+    }
+
+    public function validateEncryptedFibonacciInput()
+    {
+        $this->validate(
+            [
+                'fibonacciEncryptedString' => 'required|string|max:255',
+            ],
+            [
+                'fibonacciEncryptedString.required' => 'El camp no pot estar buit.',
+                'fibonacciEncryptedString.string' => 'El camp ha de ser una cadena de text.',
+                'fibonacciEncryptedString.max' => 'El camp no pot tenir més de :max caràcters.',
+            ]
+        );
     }
 }

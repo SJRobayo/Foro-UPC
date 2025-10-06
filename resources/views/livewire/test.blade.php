@@ -103,12 +103,14 @@
                     <label for="input1" class="block mb-2">Introdueix la teva cadena de text:</label>
                     <input type="text" id="input1" name="input1" wire:model="fibonacciInputString"
                         class="w-full mb-4 rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100">
+                    @error('fibonacciInputString')
+                        <div class="text-red-600 mb-2">{{ $message }}</div>
+                    @enderror
                     <button wire:click="fibonacciEncrypt"
                         class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Xifrar</button>
 
                     <label for="input2" class="block mb-2 mt-4">Resultat:</label>
-                    <p class="w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100 p-2"
-                        style="height: 40px;">
+                    <p class="w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100 p-2 min-h-[40px]">
                         {{ $fibonacciOutputString }}
                     </p>
                 </div>
@@ -122,6 +124,10 @@
                     <label for="input1" class="block mb-2">Introdueix la teva cadena xifrada:</label>
                     <input type="text" id="input1" name="input1" wire:model="fibonacciEncryptedString"
                         class="w-full mb-4 rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100">
+                    @error('fibonacciEncryptedString')
+                        <div class="text-red-600 mb-2">{{ $message }}</div>
+                    @enderror
+
                     <button wire:click="fibonacciDecrypt"
                         class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Desxifrar</button>
 
