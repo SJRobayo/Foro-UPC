@@ -21,7 +21,7 @@ class FibonacciService
             $prev = $curr;
             $curr = $next;
         }
-        $positions = bcmod($curr, "84");
+        $positions = bcmod($curr, "94");
         return (int)$positions;
     }
 
@@ -33,10 +33,10 @@ class FibonacciService
         $decryptedArray = [];
         foreach ($splitted as $char) {
             $code = static::$asciiMap::getCode($char);
-            $positionsMoved = self::getNumberFromSecuence($counter) % 84;
+            $positionsMoved = self::getNumberFromSecuence($counter) % 94;
             $positionsToMove = ($code - $positionsMoved);
             if ($positionsToMove < 0) {
-                $positionsToMove = 84 + $positionsToMove;
+                $positionsToMove = 94 + $positionsToMove;
             }
             $char = Ascii::MAP[$positionsToMove];
             $decryptedArray[] = $char;

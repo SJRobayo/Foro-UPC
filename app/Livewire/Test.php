@@ -42,8 +42,6 @@ class Test extends Component
     {
         $this->asciiMap = Ascii::class;
         $this->fibonacciService = FibonacciService::class;
-
-        $test =  $this->asciiMap::get(65);
         $this->map = $this->asciiMap::MAP;
         // dd($this->map);
 
@@ -107,9 +105,9 @@ class Test extends Component
         $splitted = str_split($this->fibonacciInputString);
 
         foreach ($splitted as $index => $char) {
-            $shiftNumber = $this->fibonacciService::getNumberFromSecuence($index) % 84;
+            $shiftNumber = $this->fibonacciService::getNumberFromSecuence($index) % 94;
             $code = $this->asciiMap::getCode($char);
-            $positionsToMove = ($code + $shiftNumber) % 84;
+            $positionsToMove = ($code + $shiftNumber) % 94;
             $char = $this->map[$positionsToMove];
             $this->fibonacciNewString[] = $char;
         }
