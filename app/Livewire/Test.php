@@ -31,6 +31,12 @@ class Test extends Component
     public $fibonacciNewString = [];
     public $fibonacciCypherString = '';
 
+    // Variables per al desxifratge Fibonacci
+    public $fibonacciEncryptedString = '';
+    public $fibonacciDecipheredNewString = [];
+    public $fibonacciDecipheredString = '';
+
+
 
     public function mount()
     {
@@ -100,19 +106,27 @@ class Test extends Component
         $this->fibonacciNewString = [];
         $splitted = str_split($this->fibonacciInputString);
 
-        foreach ($splitted as $char) {
-
+        foreach ($splitted as $index => $char) {
+            $shiftNumber = $this->fibonacciService::getNumberFromSecuence($index) % 83;
             $code = $this->asciiMap::getCode($char);
-            $shiftNumber = $this->fibonacciService::getNumberFromSecuence($code) % 84;
-            
-            $positionsToMove = ($code + $shiftNumber);
-            // dd($shiftNumber,$positionsToMove);
-            if ($positionsToMove > 83) {
-                $positionsToMove = $positionsToMove - 84;
-            }
-            $char = $this->map[($positionsToMove)];
+            // dump($shiftNumber);
+            $positionsToMove = ($code + $shiftNumber) % 83;
+            $char = $this->map[$positionsToMove];
             $this->fibonacciNewString[] = $char;
+
         }
         $this->fibonacciOutputString = implode('', $this->fibonacciNewString);
+    }
+
+    public function fibonacciDecrypt()
+    {
+        $this->fibonacciDecipheredNewString = [];
+        $splitted = str_split($this->fibonacciEncryptedString);
+        // dd($splitted);
+        foreach ($splitted as $char) {
+            $code = $this->asciiMap::getCode($char);
+            $this->fibonacciService::decrypt($code);
+        }
+        $this->fibonacciDecipheredString = implode('', $this->fibonacciDecipheredNewString);
     }
 }

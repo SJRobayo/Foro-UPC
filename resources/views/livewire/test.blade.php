@@ -115,5 +115,24 @@
             </div>
         </div>
     </div>
+    <div class="py-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <label for="input1" class="block mb-2">Introdueix la teva cadena xifrada:</label>
+                    <input type="text" id="input1" name="input1" wire:model="fibonacciEncryptedString"
+                        class="w-full mb-4 rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100">
+                    <button wire:click="fibonacciDecrypt"
+                        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Desxifrar</button>
+
+                    <label for="input2" class="block mb-2 mt-4">Resultat:</label>
+                    <p class="w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100 p-2"
+                        style="height: 40px;">
+                        {{ $fibonacciDecipheredString }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
