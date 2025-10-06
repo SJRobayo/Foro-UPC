@@ -110,9 +110,12 @@
                         class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Xifrar</button>
 
                     <label for="input2" class="block mb-2 mt-4">Resultat:</label>
-                    <p class="w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100 p-2 min-h-[40px]">
+                    <p
+                        class="w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100 p-2 min-h-[40px] break-words">
                         {{ $fibonacciOutputString }}
                     </p>
+
+
                 </div>
             </div>
         </div>
@@ -132,8 +135,8 @@
                         class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Desxifrar</button>
 
                     <label for="input2" class="block mb-2 mt-4">Resultat:</label>
-                    <p class="w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100 p-2"
-                        style="height: 40px;">
+                    <p
+                        class="w-full rounded border-gray-300 dark:bg-gray-700 dark:text-gray-100 p-2 min-h-[40px] break-words">
                         {{ $fibonacciDecipheredString }}
                     </p>
                 </div>

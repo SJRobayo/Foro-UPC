@@ -112,15 +112,40 @@ class Test extends Component
             $this->fibonacciNewString[] = $char;
         }
         $this->fibonacciOutputString = implode('', $this->fibonacciNewString);
+        $this->hexEncrypt();
     }
 
     public function fibonacciDecrypt()
     {
+        $decryptedHex = $this->hexDecrypt($this->fibonacciEncryptedString);
         $this->validateEncryptedFibonacciInput();
         $this->fibonacciDecipheredNewString = [];
-        $splitted = str_split($this->fibonacciEncryptedString);
-        $this->fibonacciDecipheredString = $this->fibonacciService::decrypt($this->fibonacciEncryptedString);
+        $splitted = str_split($decryptedHex);
+        $this->fibonacciDecipheredString = $this->fibonacciService::decrypt($decryptedHex);
     }
+
+
+    public function hexEncrypt()
+    {
+        $hex = '';
+        for ($i = 0; $i < strlen($this->fibonacciOutputString); $i++) {
+            $hex .= dechex(ord($this->fibonacciOutputString[$i]));
+        }
+        $this->fibonacciOutputString = strtoupper($hex);
+    }
+
+    public function hexDecrypt($text)
+    {
+        $encryptedText = $text;
+        $string = '';
+        for ($i = 0; $i < strlen($encryptedText); $i += 2) {
+            $string .= chr(hexdec(substr($encryptedText, $i, 2)));
+        }
+        $encryptedText = $string;
+        return $encryptedText;
+    }
+
+
 
     public function validateFibonacciInput()
     {
